@@ -22,4 +22,15 @@ describe 'Tasks API', type: :request do
       expect(response).to have_http_status(:created)
     end
   end
+
+  describe 'GET /tasks/:id' do
+    it 'returns a task' do
+      task = Task.create(title: 'Task 1', description: 'Description 1', status: 'open')
+
+      get "/api/v1/tasks/#{task.id}"
+
+      expect(response).to have_http_status(:success)
+      expect(JSON.parse(response.body)['id']).to eq(task.id)
+    end
+  end
 end
