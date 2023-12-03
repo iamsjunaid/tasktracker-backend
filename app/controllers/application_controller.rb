@@ -3,7 +3,7 @@ class ApplicationController < ActionController::API
 
   private
 
-  def record_not_found(e)
-    render json: { error: e.record.errors }, status: :unprocessable_entity
+  def record_not_found(err)
+    render json: { error: err.record.errors }, status: :unprocessable_entity
   end
 end

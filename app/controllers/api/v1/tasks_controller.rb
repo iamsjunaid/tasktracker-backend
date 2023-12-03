@@ -1,8 +1,8 @@
 module Api
   module V1
     class TasksController < ApplicationController
-      before_action :find_task, only: [:show, :update]
-      
+      before_action :find_task, only: %i[show update]
+
       def index
         @tasks = Task.all
         render json: @tasks
@@ -15,7 +15,7 @@ module Api
           render json: Task.all, status: :created
         else
           render json: @task.errors, status: :unprocessable_entity
-        end  
+        end
       end
 
       def show
