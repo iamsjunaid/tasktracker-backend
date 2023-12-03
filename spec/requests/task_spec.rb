@@ -33,4 +33,17 @@ describe 'Tasks API', type: :request do
       expect(JSON.parse(response.body)['id']).to eq(task.id)
     end
   end
+
+  describe 'PUT /tasks/:id' do
+    it 'updates a task' do
+      task = Task.create(title: 'Task 1', description: 'Description 1', status: 'open')
+
+      put "/api/v1/tasks/#{task.id}",
+          params: { tasks: { title: 'Task 2', description: 'Description 2', status: 'open' } }
+
+      expect(response).to have_http_status(:success)
+      expect(JSON.parse(response.body)['title']).to eq('Task 2')
+    end
+  end
+
 end
