@@ -46,4 +46,14 @@ describe 'Tasks API', type: :request do
     end
   end
 
+  describe 'DELETE /tasks/:id' do
+    it 'deletes a task' do
+      task = Task.create(title: 'Task 1', description: 'Description 1', status: 'open')
+
+      delete "/api/v1/tasks/#{task.id}"
+
+      expect(response).to have_http_status(:success)
+      expect(Task.count).to eq(0)
+    end
+  end
 end
